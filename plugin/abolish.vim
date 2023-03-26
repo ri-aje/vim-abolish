@@ -142,6 +142,14 @@ function! s:dotcase(word)
   return substitute(s:snakecase(a:word),'_','.','g')
 endfunction
 
+function! s:starcase(word)
+  return substitute(s:snakecase(a:word),'_','*','g')
+endfunction
+
+function! s:regexcase(word)
+  return substitute(s:snakecase(a:word),'_','.*','g')
+endfunction
+
 function! s:titlecase(word)
   return substitute(s:spacecase(a:word), '\(\<\w\)','\=toupper(submatch(1))','g')
 endfunction
@@ -153,6 +161,8 @@ call extend(Abolish, {
       \ 'uppercase':  s:function('s:uppercase'),
       \ 'dashcase':   s:function('s:dashcase'),
       \ 'dotcase':    s:function('s:dotcase'),
+      \ 'starcase':   s:function('s:starcase'),
+      \ 'regexcase':   s:function('s:regexcase'),
       \ 'spacecase':  s:function('s:spacecase'),
       \ 'titlecase':  s:function('s:titlecase')
       \ }, 'keep')
@@ -573,6 +583,9 @@ call extend(Abolish.Coercions, {
       \ '-': Abolish.dashcase,
       \ 'k': Abolish.dashcase,
       \ '.': Abolish.dotcase,
+      \ '*': Abolish.starcase,
+      \ 'r': Abolish.regexcase,
+      \ 'e': Abolish.regexcase,
       \ ' ': Abolish.spacecase,
       \ 't': Abolish.titlecase,
       \ "function missing": s:function("s:unknown_coercion")
