@@ -639,6 +639,7 @@ nnoremap <expr> <Plug>(abolish-coerce-word) <SID>coerce(nr2char(getchar())).'iw'
 
 if !exists("g:abolish_no_mappings") || ! g:abolish_no_mappings
   nmap cr  <Plug>(abolish-coerce-word)
+  vmap cr  <Plug>(abolish-coerce)
 endif
 
 command! -nargs=+ -bang -bar -range=0 -complete=custom,s:Complete Abolish
