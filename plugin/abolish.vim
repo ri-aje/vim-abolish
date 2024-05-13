@@ -164,7 +164,6 @@ call extend(Abolish, {
       \ 'starcase':   s:function('s:starcase'),
       \ 'regexcase':   s:function('s:regexcase'),
       \ 'spacecase':  s:function('s:spacecase'),
-      \ 'titlecase':  s:function('s:titlecase')
       \ }, 'keep')
 
 function! s:create_dictionary(lhs,rhs,opts)
@@ -392,7 +391,7 @@ function! s:find_command(cmd,flags,word)
   " beginning of the line, and we can't use position flags (e.g., /foo/e).
   " If we use :norm /pattern, we leave ourselves vulnerable to "press enter"
   " prompts (even with :silent).
-  let cmd = (a:cmd =~ '[?!]' ? '?' : '/')
+  let cmd = (a:cmd =~ '[?!]$' ? '?' : '/')
   let @/ = s:pattern(dict,opts.boundaries)
   if opts.flags == "" || !search(@/,'n')
     return "norm! ".cmd."\<CR>"
@@ -587,7 +586,6 @@ call extend(Abolish.Coercions, {
       \ 'r': Abolish.regexcase,
       \ 'e': Abolish.regexcase,
       \ ' ': Abolish.spacecase,
-      \ 't': Abolish.titlecase,
       \ "function missing": s:function("s:unknown_coercion")
       \}, "keep")
 
